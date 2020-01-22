@@ -22,7 +22,7 @@ class ProfileViewSet(ModelViewSet):
 
 
 class ProfileLinkViewSet(ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = profile.ProfileLink.objects.all()
     serializer_class = profile.ProfileLinkSerializer
 
