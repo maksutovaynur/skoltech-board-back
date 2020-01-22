@@ -18,11 +18,12 @@ services:
       options:
         tag: skolboard-api
     volumes:
+      - ./postgres.conf:/etc/postgresql.conf:ro
       - skolboard-postgres-dbdata:/var/lib/postgresql/data:rw
 
   skolboard-api:
     build:
-      dockerfile: Dockerfile
+      dockerfile: deployment/Dockerfile
       context: ..
     image: skolboard-api
     container_name: skolboard-api
@@ -36,16 +37,19 @@ services:
       driver: "journald"
       options:
         tag: skolboard-api
+
     volumes:
       - ../:/code:rw
     command: >
       sh -c "python manage.py migrate &
-             python manage.py runserver ${}"
+             python manage.py runserver 0.0.0.0:${API_INTERNAL_PORT}"
     restart: always
 
 volumes:
   skolboard-postgres-dbdata:
     name: skolboard-postgres-dbdata
+  new-volume:
+    name: new-volume
 
 networks:
   skolboard-network:
