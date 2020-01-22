@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Post, Profile, ProfileLink, Reaction, Tag, PostTagRelation
+from .models import Post, Profile, ProfileLink, Reaction, PostTagRelation, Tag
+
 # Register your models here.
 
 admin.site.register(Profile)
