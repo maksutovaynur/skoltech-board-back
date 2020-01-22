@@ -3,6 +3,7 @@ from board.models.profile import Profile
 from board.models.tag import Tag, TagSerializer
 from board.enums import ReactionType, mk_choices
 from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import PrimaryKeyRelatedField, ListSerializer
 
 
 class Post(M.Model):
@@ -17,12 +18,18 @@ class Post(M.Model):
 
 
 class PostSerializer(ModelSerializer):
-    tags = TagSerializer(many=True)
+    tags = TagSerializer(many=True, source='tags', read_only=True)
+    tag_ids = ListSerializer(child=PrimaryKeyRelatedField(queryset=Tag.objects.all()))
 
     class Meta:
         model = Post
-        fields = ['id', 'created_dttm', 'profile', 'title', 'body', 'tags']
-        read_only_fields = ('id', 'created_dttm')
+        fields = ['id', 'created_dttm', 'profile', 'title', 'body', 'tags', 'tag_ids']
+        read_only_fields = ('id', 'created_dttm', 'tags')
+        extra_kwargs = {
+            'tag_ids': {
+                'write_only': True
+            }
+        }
 
 
 class Reaction(M.Model):
