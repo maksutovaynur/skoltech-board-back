@@ -1,7 +1,7 @@
 #!/bin/bash
 
-git checkout develop
-git merge predevel
+git checkout master
+git merge develop
 git pull
 git push
-git checkout predevel
+git checkout develop
