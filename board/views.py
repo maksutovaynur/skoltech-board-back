@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
+from board.models import post, tag, profile
 
-# Create your views here.
+
+class PostViewSet(ModelViewSet):
+    queryset = post.Post.objects.all()
+    serializer_class = post.PostSerializer
+

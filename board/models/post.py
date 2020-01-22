@@ -1,6 +1,7 @@
 from django.db import models as M
 from board.models.profile import Profile
 from board.enums import ReactionType, mk_choices
+from rest_framework.serializers import ModelSerializer
 
 
 class Post(M.Model):
@@ -11,6 +12,13 @@ class Post(M.Model):
 
     class Meta:
         db_table = 'skolboard_post'
+
+
+class PostSerializer(ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['id', 'created_dttm', 'profile', 'title', 'body']
+        read_only_fields = ('id', 'created_dttm')
 
 
 class Reaction(M.Model):
