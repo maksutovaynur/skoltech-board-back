@@ -69,4 +69,7 @@ class LogoutView(APIView):
 
 class RefreshTelegramChannelId(APIView):
     def post(self, request, *args, **kwargs):
-        return JsonResponse(data={})
+        uid = request.data.get('user_id')
+        tid = request.data.get('telegram_chat_id')
+        profile.Profile.objects.select_for_update().filter(pk=uid).update(telegram_chat_id=tid)
+        return JsonResponse(data=dict(user_id=uid, telegram_chat_id=tid))

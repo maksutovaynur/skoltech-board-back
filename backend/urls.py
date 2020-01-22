@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from board.views import LoginView, LogoutView
+from board import views as V
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -23,7 +23,8 @@ from django.views.decorators.csrf import csrf_exempt
 urlpatterns = [
     path('api/admin/', admin.site.urls, name='admin'),
     path('api/auth/', include('rest_framework.urls'), name='auth'),
-    path('api/login/', csrf_exempt(LoginView.as_view())),
-    path('api/logout/', csrf_exempt(LogoutView.as_view())),
+    path('api/login/', csrf_exempt(V.LoginView.as_view())),
+    path('api/logout/', csrf_exempt(V.LogoutView.as_view())),
+    path('api/telegram_chat_update/', csrf_exempt(V.RefreshTelegramChannelId.as_view())),
     path('api/', include('board.urls'), name='board'),
 ]
