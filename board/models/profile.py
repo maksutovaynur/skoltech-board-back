@@ -1,12 +1,13 @@
 from django.db import models as M
 from board.enums import ProfileType, mk_choices
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer, CharField, PrimaryKeyRelatedField
 from django.contrib.auth.models import AbstractUser
 
 
 class Profile(AbstractUser):
     created_dttm = M.DateTimeField(auto_now_add=True)
     type = M.IntegerField(null=False, choices=mk_choices(ProfileType), default=ProfileType.PERSON)
+    telegram_chat_id = M.CharField(null=True, default=None, max_length=256)
 
     class Meta:
         db_table = 'skolboard_profile'
@@ -29,17 +30,20 @@ class FullProfileLinkSerializer(ModelSerializer):
 
 
 class ProfileLinkSerializer(ModelSerializer):
+    profile = PrimaryKeyRelatedField
+
     class Meta:
         model = ProfileLink
-        fields = ['link', 'description']
+        fields = ['link', 'description', 'profile']
 
 
-class ProfileSerializer(ModelSerializer):
+class ProfileSerializer(HyperlinkedModelSerializer):
     links = ProfileLinkSerializer(many=True, required=False)
+    username = CharField(min_length=3)
+    password = CharField(min_length=3, style={'input_type': 'password'}, write_only=True)
 
     class Meta:
         model = Profile
-        fields = ['id', 'created_dttm', 'first_name', 'last_name', 'password', 'email',
+        fields = ['id', 'created_dttm', 'first_name', 'last_name', 'username', 'password', 'email',
                   'type', 'links']
         read_only_fields = ['id', 'created_dttm']
-        extra_kwargs = {'password': {'write_only': True}}

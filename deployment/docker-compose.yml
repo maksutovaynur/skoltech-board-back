@@ -34,15 +34,13 @@ services:
     volumes:
       - ../:/code:rw
     command: >
-      sh -c "python manage.py migrate &
-             python manage.py runserver 0.0.0.0:${API_PORT}"
+      sh -c "python manage.py runserver 0.0.0.0:${API_PORT}"
     restart: always
 
 volumes:
   skolboard-postgres-dbdata:
     name: skolboard-postgres-dbdata
-  new-volume:
-    name: new-volume
+
 
 networks:
   skolboard-network:

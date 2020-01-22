@@ -35,5 +35,11 @@ class ReactionViewSet(ModelViewSet):
 
 class TagViewSet(ModelViewSet):
     permission_classes = [ReadOnly]
-    queryset = tag.Tag.objects
+    queryset = tag.Tag.objects.all()
     serializer_class = tag.TagSerializer
+
+
+class LinkViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = profile.ProfileLink.objects.all()
+    serializer_class = profile.ProfileLinkSerializer
