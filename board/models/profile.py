@@ -49,3 +49,15 @@ class ProfileSerializer(HyperlinkedModelSerializer):
                   'type', 'links', 'telegram_chat_id']
         read_only_fields = ['id', 'created_dttm']
 
+    def create(self, validated_data):
+        user: Profile = super(ProfileSerializer, self).create(validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+    def update(self, instance, validated_data):
+        user: Profile = super(ProfileSerializer, self).update(instance, validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+

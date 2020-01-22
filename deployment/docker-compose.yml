@@ -4,7 +4,7 @@ services:
   skolboard-postgres:
     image: postgres:latest
     container_name: skolboard-postgres
-    user: ${POSTGRES_USER}
+#    user: ${POSTGRES_USER}
     networks:
       - skolboard-network
     environment:
@@ -13,8 +13,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - ${POSTGRES_DOCKER_PORT}:5432
-
     volumes:
+      - ./dumps:/dumps:rw
       - ./postgres.conf:/etc/postgresql.conf:ro
       - skolboard-postgres-dbdata:/var/lib/postgresql/data:rw
 
