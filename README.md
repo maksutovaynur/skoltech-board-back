@@ -17,5 +17,11 @@ alter role skoltech_board_user set client_encoding to 'utf8';
 alter role skoltech_board_user set default_transaction_isolation to 'read committed';
 alter role skoltech_board_user set timezone to 'UTC';
 create database skoltech_board_db owner skoltech_board_user;
-
 ```
+
+## Configure with docker
+
+    cd deployment
+    ./run.sh
+
+##### Important node: If you use docker configuration, please use `POSTGRES_USER=postgres`
