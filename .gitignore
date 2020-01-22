@@ -4,3 +4,7 @@ env/
 
 *__pycache__*
 .DS_Store/
+
+*/migrations/**
+!*/migrations/__init__.py
+
