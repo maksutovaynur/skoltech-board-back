@@ -13,10 +13,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - ${POSTGRES_DOCKER_PORT}:5432
-    logging:
-      driver: "journald"
-      options:
-        tag: skolboard-api
+
     volumes:
       - ./postgres.conf:/etc/postgresql.conf:ro
       - skolboard-postgres-dbdata:/var/lib/postgresql/data:rw
@@ -33,10 +30,6 @@ services:
       - ${API_HOST}:${API_PORT}:${API_PORT}
     depends_on:
       - skolboard-postgres
-    logging:
-      driver: "journald"
-      options:
-        tag: skolboard-api
 
     volumes:
       - ../:/code:rw
