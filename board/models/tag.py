@@ -1,10 +1,12 @@
 from django.db import models as M
 from rest_framework.serializers import ModelSerializer
+from board.enums import TagLevel, mk_choices
 
 
 class Tag(M.Model):
     created_dttm = M.DateTimeField(auto_now_add=True)
     name = M.CharField(null=False, max_length=64)
+    level = M.IntegerField(null=False, choices=mk_choices(TagLevel))
 
     class Meta:
         db_table = 'skolboard_tag'

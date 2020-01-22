@@ -30,7 +30,7 @@ class Reaction(M.Model):
     created_dttm = M.DateTimeField(auto_now_add=True)
     owner = M.ForeignKey(Profile, null=False, on_delete=M.CASCADE, related_name='reactions')
     post = M.ForeignKey(Post, null=False, on_delete=M.CASCADE, related_name='reactions')
-    description = M.TextField(null=True, default=None)
+    description = M.TextField(null=True, default=None, blank=True)
     type = M.IntegerField(null=False, choices=mk_choices(ReactionType))
 
     class Meta:
