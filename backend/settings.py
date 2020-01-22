@@ -17,7 +17,7 @@ from environs import Env
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEPLOYMENT_PATH = os.path.join(BASE_DIR, 'deployment')
-ENV_PATH = os.path.join(DEPLOYMENT_PATH, '.env')
+ENV_PATH = os.path.join(BASE_DIR, 'deployment/.env')
 
 env: Env = Env()
 env.read_env(path=ENV_PATH)
@@ -88,8 +88,8 @@ DATABASES = {
         'NAME': env.str('POSTGRES_DB'),
         'USER': env.str('POSTGRES_USER'),
         'PASSWORD': env.str('POSTGRES_PASSWORD'),
-        'HOST': env.str('POSTGRES_HOST'),
-        'PORT': env.str('POSTGRES_PORT')
+        'HOST': 'skolboard-postgres',
+        'PORT': 5432
     }
 }
 
