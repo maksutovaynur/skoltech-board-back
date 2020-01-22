@@ -31,3 +31,11 @@ class Reaction(M.Model):
     class Meta:
         db_table = 'skolboard_reaction'
 
+
+class ReactionSerializer(ModelSerializer):
+    class Meta:
+        model = Reaction
+        fields = ['id', 'created_dttm', 'owner', 'post', 'description', 'type']
+        read_only_fields = ['id', 'created_dttm']
+
+
