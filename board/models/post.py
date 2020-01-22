@@ -22,13 +22,8 @@ class PostSerializer(ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'created_dttm', 'profile', 'title', 'body', 'tags', 'tag_ids']
+        fields = ['id', 'created_dttm', 'profile', 'title', 'body', 'tags']
         read_only_fields = ('id', 'created_dttm', 'tags')
-        extra_kwargs = {
-            'tag_ids': {
-                'write_only': True
-            }
-        }
 
 
 class Reaction(M.Model):
