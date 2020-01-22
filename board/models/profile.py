@@ -38,7 +38,7 @@ class ProfileLinkSerializer(ModelSerializer):
 
 
 class ProfileSerializer(HyperlinkedModelSerializer):
-    links = ProfileLinkSerializer(many=True, required=False)
+    links = ProfileLinkSerializer(many=True, required=False, read_only=True)
     username = CharField(min_length=3)
     password = CharField(min_length=3, style={'input_type': 'password'}, write_only=True)
 

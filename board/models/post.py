@@ -20,8 +20,6 @@ class Post(M.Model):
 class PostSerializer(ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
 
-    tag_ids = ListSerializer(child=PrimaryKeyRelatedField(queryset=Tag.objects.all()), source='tags')
-
     class Meta:
         model = Post
         fields = ['id', 'created_dttm', 'profile', 'title', 'body', 'tags', 'tag_ids']

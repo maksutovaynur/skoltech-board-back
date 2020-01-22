@@ -16,13 +16,13 @@ class PostViewSet(ModelViewSet):
 
 
 class ProfileViewSet(ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = profile.Profile.objects.all()
     serializer_class = profile.ProfileSerializer
 
 
 class ProfileLinkViewSet(ModelViewSet):
-    # permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = profile.ProfileLink.objects.all()
     serializer_class = profile.ProfileLinkSerializer
 
