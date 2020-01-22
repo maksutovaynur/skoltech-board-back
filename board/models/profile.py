@@ -1,13 +1,12 @@
 from django.db import models as M
 from board.enums import ProfileType, mk_choices
 from rest_framework.serializers import ModelSerializer
+from django.contrib.auth.models import AbstractUser
 
 
-class Profile(M.Model):
+class Profile(AbstractUser):
     created_dttm = M.DateTimeField(auto_now_add=True)
-    name = M.CharField(null=False, max_length=256)
-    email = M.EmailField(null=False)
-    type = M.IntegerField(null=False, choices=mk_choices(ProfileType))
+    type = M.IntegerField(null=False, choices=mk_choices(ProfileType), default=ProfileType.PERSON)
 
     class Meta:
         db_table = 'skolboard_profile'
@@ -40,5 +39,7 @@ class ProfileSerializer(ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id', 'created_dttm', 'name', 'email', 'type', 'links']
+        fields = ['id', 'created_dttm', 'first_name', 'last_name', 'password', 'email',
+                  'type', 'links']
         read_only_fields = ['id', 'created_dttm']
+        extra_kwargs = {'password': {'write_only': True}}

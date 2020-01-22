@@ -1,5 +1,6 @@
 from django.db import models as M
 from board.models.profile import Profile
+from board.models.tag import Tag, TagSerializer
 from board.enums import ReactionType, mk_choices
 from rest_framework.serializers import ModelSerializer
 
@@ -9,15 +10,18 @@ class Post(M.Model):
     profile = M.ForeignKey(Profile, null=False, on_delete=M.CASCADE, related_name='posts')
     title = M.CharField(null=False, max_length=256)
     body = M.TextField(null=False)
+    tags = M.ManyToManyField(Tag, related_name='posts', db_table='skolboard_post_tags')
 
     class Meta:
         db_table = 'skolboard_post'
 
 
 class PostSerializer(ModelSerializer):
+    tags = TagSerializer(many=True)
+
     class Meta:
         model = Post
-        fields = ['id', 'created_dttm', 'profile', 'title', 'body']
+        fields = ['id', 'created_dttm', 'profile', 'title', 'body', 'tags']
         read_only_fields = ('id', 'created_dttm')
 
 

@@ -1,5 +1,4 @@
 from django.db import models as M
-from . import Post
 from rest_framework.serializers import ModelSerializer
 
 
@@ -17,11 +16,11 @@ class TagSerializer(ModelSerializer):
         fields = ['id', 'created_dttm', 'name']
         read_only_fields = ('id', 'created_dttm')
 
-
-class PostTagRelation(M.Model):
-    post = M.ForeignKey(Post, null=False, on_delete=M.CASCADE, related_name='tags')
-    tag = M.ForeignKey(Tag, null=False, on_delete=M.CASCADE, related_name='tags')
-
-    class Meta:
-        db_table = 'skolboard_post_tag_relation'
+#
+# class PostTagRelation(M.Model):
+#     post = M.ForeignKey(Post, null=False, on_delete=M.CASCADE, related_name='tags')
+#     tag = M.ForeignKey(Tag, null=False, on_delete=M.CASCADE, related_name='tags')
+#
+#     class Meta:
+#         db_table = 'skolboard_post_tag_relation'
 
