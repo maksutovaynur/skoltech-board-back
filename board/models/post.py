@@ -1,8 +1,8 @@
 from django.db import models as M
-from board.models.profile import Profile
+from board.models.profile import Profile, ProfileSerializer
 from board.models.tag import Tag, TagSerializer
 from board.enums import ReactionType, mk_choices
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 
 
 class Post(M.Model):
@@ -17,11 +17,13 @@ class Post(M.Model):
 
 
 class PostSerializer(ModelSerializer):
-    tags = TagSerializer(many=True, read_only=True)
+    tags = TagSerializer(many=True)
+    profile = ProfileSerializer(read_only=True)
+    profile_id = PrimaryKeyRelatedField(source=profile, write_only=True)
 
     class Meta:
         model = Post
-        fields = ['id', 'created_dttm', 'profile', 'title', 'body', 'tags']
+        fields = ['id', 'created_dttm', 'profile', 'profile_id', 'title', 'body', 'tags']
         read_only_fields = ('id', 'created_dttm', 'tags')
 
 
