@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.2 (Debian 11.2-1.pgdg90+1)
--- Dumped by pg_dump version 11.2 (Debian 11.2-1.pgdg90+1)
+-- Dumped from database version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.10 (Ubuntu 10.10-0ubuntu0.18.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -12,8 +12,23 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
 
 SET default_tablespace = '';
 
@@ -741,6 +756,20 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 52	2020-01-22 22:10:16.488311+00	3	org_12	2	[]	7	2
 53	2020-01-22 22:11:38.46838+00	3	org_12	2	[]	7	2
 54	2020-01-22 22:11:44.790947+00	3	org_12	2	[]	7	2
+55	2020-01-23 00:10:05.828906+00	3	org_12	2	[{"changed": {"fields": ["password"]}}]	7	2
+56	2020-01-23 00:10:12.722565+00	3	org_12	2	[]	7	2
+57	2020-01-23 00:10:22.6573+00	7	ALab	2	[{"changed": {"fields": ["password"]}}]	7	2
+58	2020-01-23 00:10:38.444115+00	4	amam1	2	[{"changed": {"fields": ["password"]}}]	7	2
+59	2020-01-23 00:10:50.5264+00	9	badboy	2	[{"changed": {"fields": ["password"]}}]	7	2
+60	2020-01-23 00:11:03.429827+00	5	MySuperOrg2	2	[{"changed": {"fields": ["password"]}}]	7	2
+61	2020-01-23 00:11:15.910551+00	6	my-super-org3	2	[{"changed": {"fields": ["password"]}}]	7	2
+62	2020-01-23 00:11:37.549741+00	8	wefwgeufy	2	[{"changed": {"fields": ["password"]}}]	7	2
+63	2020-01-23 00:13:09.39125+00	7	Tag object (7)	1	[{"added": {}}]	8	2
+64	2020-01-23 00:13:21.900408+00	8	Tag object (8)	1	[{"added": {}}]	8	2
+65	2020-01-23 00:14:15.651914+00	9	Tag object (9)	1	[{"added": {}}]	8	2
+66	2020-01-23 00:14:38.17895+00	10	Tag object (10)	1	[{"added": {}}]	8	2
+67	2020-01-23 00:15:23.354341+00	11	Tag object (11)	1	[{"added": {}}]	8	2
+68	2020-01-23 00:15:31.04235+00	12	Tag object (12)	1	[{"added": {}}]	8	2
 \.
 
 
@@ -804,7 +833,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 mb4vyheexku9ita650rhlh6ur33s2zrz	YTkyM2M4ODAwZmY4NTdmMGRjZDdjMDBhMDRiMWFmMTJkNzFhZjdmNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlYTQyNTRmOWZhZGY4YmZkMDg3MTcxMTNmYWFmNTQyZTZiNzQzMDNkIn0=	2020-02-05 21:14:18.310566+00
-6ut9ddrsh2njl4efgjwp0coslnd9xh0i	YTkyM2M4ODAwZmY4NTdmMGRjZDdjMDBhMDRiMWFmMTJkNzFhZjdmNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlYTQyNTRmOWZhZGY4YmZkMDg3MTcxMTNmYWFmNTQyZTZiNzQzMDNkIn0=	2020-02-05 21:27:23.288247+00
+dgpsrnme3bkoaxhk70fqbth4o1i0m1r9	YTkyM2M4ODAwZmY4NTdmMGRjZDdjMDBhMDRiMWFmMTJkNzFhZjdmNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlYTQyNTRmOWZhZGY4YmZkMDg3MTcxMTNmYWFmNTQyZTZiNzQzMDNkIn0=	2020-02-06 00:11:37.5558+00
 \.
 
 
@@ -830,13 +859,13 @@ COPY public.skolboard_post_tags (id, post_id, tag_id) FROM stdin;
 
 COPY public.skolboard_profile (id, email, type, created_dttm, date_joined, first_name, is_active, is_staff, is_superuser, last_login, last_name, password, username, telegram_chat_id) FROM stdin;
 2	maksutov_aynur@mail.ru	0	2020-01-22 18:30:21.662725+00	2020-01-22 18:30:21+00		t	t	t	2020-01-22 21:27:23+00		pbkdf2_sha256$180000$SwVjSwJNyybi$lpcrVroqPnh6CmVH08IGs8UqAdnl07+XDRYuMgZKHIY=	maksutov_aynur	\N
-4	amam@mama.com	0	2020-01-22 21:38:32.513393+00	2020-01-22 21:35:45+00	amam	t	f	f	\N	mama	123	amam1	\N
-5	superorg@example.com	1	2020-01-22 21:46:12.474626+00	2020-01-22 21:45:35+00	Super	t	f	f	\N	Organization	123	MySuperOrg2	\N
-6	org3@example.com	1	2020-01-22 21:46:49.449888+00	2020-01-22 21:46:20+00	A wonderful	t	f	f	\N	Organization	123	my-super-org3	\N
-7	alab@example.com	1	2020-01-22 21:47:18.47122+00	2020-01-22 21:46:55+00	A	t	f	f	\N	Lab	123	ALab	\N
-8	jsnow@example.com	0	2020-01-22 21:47:53.051072+00	2020-01-22 21:47:23+00	John	t	f	f	\N	Snow	123	wefwgeufy	\N
-9	asm@example.com	0	2020-01-22 21:48:35.526908+00	2020-01-22 21:48:09+00	Andrey	t	f	f	\N	Smirnoff	123	badboy	\N
-3	e1@example.com	1	2020-01-22 20:09:26.320559+00	2020-01-22 20:09:26+00	Homo	t	f	f	\N	Sapiens	qwe	org_12	\N
+3	e1@example.com	1	2020-01-22 20:09:26.320559+00	2020-01-22 20:09:26+00	Homo	t	f	f	\N	Sapiens	pbkdf2_sha256$150000$m74ANr6xH6Ez$9PrypOLN1+OoZmlF1kULCfR3XjWbha9wxtkItcNH90A=	org_12	\N
+7	alab@example.com	1	2020-01-22 21:47:18.47122+00	2020-01-22 21:46:55+00	A	t	f	f	\N	Lab	pbkdf2_sha256$150000$g4WlaRjPaoyk$itWxNbQqZH+UQEI6d8EJUrNVZusdfOlUFodCxcWuxk8=	ALab	\N
+4	amam@mama.com	0	2020-01-22 21:38:32.513393+00	2020-01-22 21:35:45+00	amam	t	f	f	\N	mama	pbkdf2_sha256$150000$Uhgj2h05FZOB$K0sSv91pO4D6Olcfm9Z5voEBb2ljNo7wCc6SB6Fr7qI=	amam1	\N
+9	asm@example.com	0	2020-01-22 21:48:35.526908+00	2020-01-22 21:48:09+00	Andrey	t	f	f	\N	Smirnoff	pbkdf2_sha256$150000$uzIC1PDvo0JA$f4yY+DCRUZK+D3pBzDMaD/WvpI/AO7VL7YwDADOH/CY=	badboy	\N
+5	superorg@example.com	1	2020-01-22 21:46:12.474626+00	2020-01-22 21:45:35+00	Super	t	f	f	\N	Organization	pbkdf2_sha256$150000$yRUVkBbihFXE$m0HmW/60hFli7U4CFQT+n5a8MpA7Up5pYbn+5IhAIVw=	MySuperOrg2	\N
+6	org3@example.com	1	2020-01-22 21:46:49.449888+00	2020-01-22 21:46:20+00	A wonderful	t	f	f	\N	Organization	pbkdf2_sha256$150000$OjAHmFejfb86$fTFPdXeWgCMH2OJPxGykowkimgZpsoJfpzw/AUDPalE=	my-super-org3	\N
+8	jsnow@example.com	0	2020-01-22 21:47:53.051072+00	2020-01-22 21:47:23+00	John	t	f	f	\N	Snow	pbkdf2_sha256$150000$pviyOFuu1eGh$q6yYg9XqU1pgHA4IKJpBDv/38mR2chL+szbS+YVfxGE=	wefwgeufy	\N
 \.
 
 
@@ -888,6 +917,12 @@ COPY public.skolboard_tag (id, created_dttm, name, level) FROM stdin;
 4	2020-01-22 21:57:03.826299+00	Job	2
 5	2020-01-22 21:57:14.066463+00	Lab	2
 6	2020-01-22 21:58:59.427295+00	Event	2
+7	2020-01-23 00:13:09.390211+00	Official	3
+8	2020-01-23 00:13:21.899595+00	Party	3
+9	2020-01-23 00:14:15.65111+00	Quickly	3
+10	2020-01-23 00:14:38.178075+00	Beer	3
+11	2020-01-23 00:15:23.353427+00	Fun	3
+12	2020-01-23 00:15:31.041466+00	Bored	3
 \.
 
 
@@ -923,7 +958,7 @@ SELECT pg_catalog.setval('public.board_reaction_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 54, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 68, true);
 
 
 --
@@ -986,7 +1021,7 @@ SELECT pg_catalog.setval('public.skolboard_profile_user_permissions_id_seq', 1, 
 -- Name: skolboard_tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.skolboard_tag_id_seq', 6, true);
+SELECT pg_catalog.setval('public.skolboard_tag_id_seq', 12, true);
 
 
 --
