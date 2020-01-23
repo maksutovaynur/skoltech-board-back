@@ -14,6 +14,7 @@ class Post(M.Model):
 
     class Meta:
         db_table = 'skolboard_post'
+        ordering = ['-created_dttm']
 
 
 class PostSerializer(ModelSerializer):
