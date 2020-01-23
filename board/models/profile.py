@@ -17,9 +17,6 @@ class Profile(AbstractUser):
         db_table = 'skolboard_profile'
 
 
-
-
-
 class ProfileLink(M.Model):
     profile = M.ForeignKey(Profile, null=False, on_delete=M.CASCADE, related_name='links')
     link = M.URLField(null=False)
@@ -44,7 +41,7 @@ class ProfileLinkSerializer(ModelSerializer):
         fields = ['link', 'description', 'profile']
 
 
-class ProfileSerializer(Serializer):
+class ProfileSerializer(ModelSerializer):
     links = ProfileLinkSerializer(many=True, required=False, read_only=True)
     username = CharField(min_length=3)
     password = CharField(min_length=3, style={'input_type': 'password'}, write_only=True)
@@ -64,7 +61,6 @@ class ProfileSerializer(Serializer):
         for k, v in validated_data.items():
             setattr(instance, k, v)
         instance.set_password(raw_password=validated_data['password'])
-        log.info(f"UPDATE pwd: {instance.password}!")
         instance.save()
         return instance
 

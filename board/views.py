@@ -1,7 +1,9 @@
+import django_filters as F
 from rest_framework.viewsets import ModelViewSet
-from board.models import post, tag, profile
+from board.models import post, tag, profile, Post
 from rest_framework.request import Request
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, BasePermission, SAFE_METHODS
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ReadOnly(BasePermission):
@@ -12,12 +14,23 @@ class ReadOnly(BasePermission):
 class PostViewSet(ModelViewSet):
     queryset = post.Post.objects.all()
     serializer_class = post.PostSerializer
+    # filter_backends = [DjangoFilterBackend]
+    filterset_fields = {
+        'created_dttm': ['gte', 'lte', 'range'],
+        'tags': ['exact'],
+        'profile': ['exact'],
+        'profile__type': ['exact']
+    }
 
 
 class ProfileViewSet(ModelViewSet):
     # permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = profile.Profile.objects.all()
     serializer_class = profile.ProfileSerializer
+    filterset_fields = {
+        'created_dttm': ['gte', 'lte', 'range'],
+        'type': ['exact']
+    }
 
 
 class ProfileLinkViewSet(ModelViewSet):
@@ -30,12 +43,22 @@ class ReactionViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = post.Reaction.objects.all()
     serializer_class = post.ReactionSerializer
+    filterset_fields = {
+        'type': ['in'],
+        'post': ['exact'],
+        'post__profile': ['exact'],
+        'post__tags': ['exact'],
+        'owner': ['exact'],
+    }
 
 
 class TagViewSet(ModelViewSet):
     permission_classes = [ReadOnly]
     queryset = tag.Tag.objects.all()
     serializer_class = tag.TagSerializer
+    filterset_fields = {
+        'level': ['exact']
+    }
 
 
 class LinkViewSet(ModelViewSet):
