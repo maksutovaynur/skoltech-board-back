@@ -4,7 +4,9 @@ from board.models import post, tag, profile, Post
 from rest_framework.request import Request
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, BasePermission, SAFE_METHODS
 from django_filters.rest_framework import DjangoFilterBackend
+import logging
 
+log = logging.getLogger("Lol")
 
 class ReadOnly(BasePermission):
     def has_permission(self, request: Request, view):
@@ -15,9 +17,12 @@ class PostViewSet(ModelViewSet):
     def get_queryset(self):
         qs = post.Post.objects
         tags = self.request.query_params.get('tags', None)
+        try: tags = eval(tags)
+        except: tags = None
         if isinstance(tags, list):
             for t in tags:
                 qs = qs.filter(tags=t)
+        log.info(f"Tags: {tags}, type: {type(tags)}")
         return qs.all()
     serializer_class = post.PostSerializer
     # filter_backends = [DjangoFilterBackend]
