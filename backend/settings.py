@@ -117,6 +117,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+import logging
+import sys
+
+logging.basicConfig(format='{asctime} {levelname:3.3} {filename:10.10} {lineno:4} {name:21.21}| {message}',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    style='{',
+                    handlers=[logging.StreamHandler(stream=sys.stdout)],
+                    level=getattr(logging, 'DEBUG'),)
+
 
 
 # Internationalization

@@ -3,7 +3,6 @@ from board.models.profile import Profile
 from board.models.tag import Tag, TagSerializer
 from board.enums import ReactionType, mk_choices
 from rest_framework.serializers import ModelSerializer
-from rest_framework.serializers import PrimaryKeyRelatedField, ListSerializer
 
 
 class Post(M.Model):

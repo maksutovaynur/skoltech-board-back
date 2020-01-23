@@ -15,7 +15,7 @@ class Tag(M.Model):
 class TagSerializer(ModelSerializer):
     class Meta:
         model = Tag
-        fields = ['id', 'created_dttm', 'name']
+        fields = ['id', 'created_dttm', 'name', 'level']
         read_only_fields = ('id', 'created_dttm')
 
 #

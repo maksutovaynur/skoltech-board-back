@@ -1,7 +1,11 @@
 from django.db import models as M
 from board.enums import ProfileType, mk_choices
-from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer, CharField, PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer, Serializer, CharField, PrimaryKeyRelatedField
 from django.contrib.auth.models import AbstractUser
+import logging
+
+
+log = logging.getLogger('Profile')
 
 
 class Profile(AbstractUser):
@@ -11,6 +15,9 @@ class Profile(AbstractUser):
 
     class Meta:
         db_table = 'skolboard_profile'
+
+
+
 
 
 class ProfileLink(M.Model):
@@ -37,7 +44,7 @@ class ProfileLinkSerializer(ModelSerializer):
         fields = ['link', 'description', 'profile']
 
 
-class ProfileSerializer(HyperlinkedModelSerializer):
+class ProfileSerializer(Serializer):
     links = ProfileLinkSerializer(many=True, required=False, read_only=True)
     username = CharField(min_length=3)
     password = CharField(min_length=3, style={'input_type': 'password'}, write_only=True)
@@ -50,14 +57,14 @@ class ProfileSerializer(HyperlinkedModelSerializer):
         read_only_fields = ['id', 'created_dttm']
 
     def create(self, validated_data):
-        user: Profile = super(ProfileSerializer, self).create(validated_data)
-        user.set_password(validated_data['password'])
-        user.save()
+        user = Profile.objects.create_user(**validated_data)
         return user
 
-    def update(self, instance, validated_data):
-        user: Profile = super(ProfileSerializer, self).update(instance, validated_data)
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
+    def update(self, instance: Profile, validated_data):
+        for k, v in validated_data.items():
+            setattr(instance, k, v)
+        instance.set_password(raw_password=validated_data['password'])
+        log.info(f"UPDATE pwd: {instance.password}!")
+        instance.save()
+        return instance
 
