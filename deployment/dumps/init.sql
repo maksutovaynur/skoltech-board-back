@@ -888,6 +888,7 @@ COPY public.skolboard_profile (id, email, type, created_dttm, date_joined, first
 6	org3@example.com	1	2020-01-22 21:46:49.449888+00	2020-01-22 21:46:20+00	A wonderful	t	f	f	\N	Organization	pbkdf2_sha256$150000$OjAHmFejfb86$fTFPdXeWgCMH2OJPxGykowkimgZpsoJfpzw/AUDPalE=	my-super-org3	\N
 8	jsnow@example.com	0	2020-01-22 21:47:53.051072+00	2020-01-22 21:47:23+00	John	t	f	f	\N	Snow	pbkdf2_sha256$150000$pviyOFuu1eGh$q6yYg9XqU1pgHA4IKJpBDv/38mR2chL+szbS+YVfxGE=	wefwgeufy	\N
 10	ivs@example.com	0	2020-01-23 00:18:50.998402+00	2020-01-23 00:18:50.880581+00		t	t	t	\N		pbkdf2_sha256$150000$p1fenptNRVGN$OqeZ9N1c8ebq6293Is1aaGa2iV8cEM6qhKDLm0VtcBs=	ivs	\N
+11	emial@ameil.emil	0	2020-01-23 00:45:10.847061+00	2020-01-23 00:45:10.846785+00	New par par	t	f	f	\N	New par par last	pbkdf2_sha256$150000$SUvfeoWxgTNR$LP02MlBJzTFv8Kzb/PvzrqW/33RwlZ3S7hOKhGprq6I=	ololo	\N
 \.
 
 
@@ -1026,7 +1027,7 @@ SELECT pg_catalog.setval('public.skolboard_profile_groups_id_seq', 1, false);
 -- Name: skolboard_profile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.skolboard_profile_id_seq', 10, true);
+SELECT pg_catalog.setval('public.skolboard_profile_id_seq', 11, true);
 
 
 --
