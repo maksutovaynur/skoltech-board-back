@@ -19,6 +19,8 @@ class PostViewSet(ModelViewSet):
         tags = self.request.query_params.get('tags', None)
         try: tags = eval(tags)
         except: tags = None
+        if isinstance(tags, int):
+            tags = [tags]
         if isinstance(tags, list):
             for t in tags:
                 qs = qs.filter(tags=t)
