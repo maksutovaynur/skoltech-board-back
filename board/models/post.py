@@ -17,7 +17,7 @@ class Post(M.Model):
 
 
 class PostSerializer(ModelSerializer):
-    tags = TagSerializer(many=True)
+    tags = TagSerializer(many=True, read_only=True)
     tag_ids = ListField(PrimaryKeyRelatedField(pk_field='id', queryset=Tag.objects.all()), source='tags')
     profile = ProfileSerializer(read_only=True, many=False)
     profile_id = PrimaryKeyRelatedField(write_only=True, queryset=Profile.objects.all(), source='profile')
@@ -25,7 +25,7 @@ class PostSerializer(ModelSerializer):
     class Meta:
         model = Post
         fields = ['id', 'created_dttm', 'profile', 'profile_id', 'title', 'body', 'tags', 'tag_ids']
-        read_only_fields = ('id', 'created_dttm', 'profile')
+        read_only_fields = ('id', 'created_dttm', 'profile', 'tags')
 
 
 class Reaction(M.Model):
