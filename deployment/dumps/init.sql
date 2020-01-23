@@ -770,6 +770,13 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 66	2020-01-23 00:14:38.17895+00	10	Tag object (10)	1	[{"added": {}}]	8	2
 67	2020-01-23 00:15:23.354341+00	11	Tag object (11)	1	[{"added": {}}]	8	2
 68	2020-01-23 00:15:31.04235+00	12	Tag object (12)	1	[{"added": {}}]	8	2
+69	2020-01-23 00:21:12.000815+00	1	Post object (1)	1	[{"added": {}}]	6	2
+70	2020-01-23 00:21:39.496409+00	2	Post object (2)	1	[{"added": {}}]	6	2
+71	2020-01-23 00:22:12.072391+00	3	Post object (3)	1	[{"added": {}}]	6	2
+72	2020-01-23 00:22:40.345089+00	1	Reaction object (1)	1	[{"added": {}}]	9	2
+73	2020-01-23 00:22:58.404739+00	2	Reaction object (2)	1	[{"added": {}}]	9	2
+74	2020-01-23 00:23:27.10011+00	3	Reaction object (3)	1	[{"added": {}}]	9	2
+75	2020-01-23 00:34:39.406354+00	6	ProfileLink object (6)	1	[{"added": {}}]	10	2
 \.
 
 
@@ -842,6 +849,9 @@ dgpsrnme3bkoaxhk70fqbth4o1i0m1r9	YTkyM2M4ODAwZmY4NTdmMGRjZDdjMDBhMDRiMWFmMTJkNzF
 --
 
 COPY public.skolboard_post (id, created_dttm, title, body, profile_id) FROM stdin;
+1	2020-01-23 00:21:11.995702+00	Needed a Botan	Come here if you are a Botan	7
+2	2020-01-23 00:21:39.492527+00	Hoho	Lalala	5
+3	2020-01-23 00:22:12.068059+00	Search for job	Anybody, Help!	4
 \.
 
 
@@ -850,6 +860,17 @@ COPY public.skolboard_post (id, created_dttm, title, body, profile_id) FROM stdi
 --
 
 COPY public.skolboard_post_tags (id, post_id, tag_id) FROM stdin;
+1	1	1
+2	1	4
+3	1	6
+4	1	9
+5	1	11
+6	2	1
+7	2	12
+8	2	5
+9	3	8
+10	3	2
+11	3	4
 \.
 
 
@@ -888,6 +909,7 @@ COPY public.skolboard_profile_link (id, link, description, profile_id) FROM stdi
 3	https://vk.com/razvitiye	My super vk page	8
 4	http://tg.com/12345	\N	7
 5	http://org.com	Our official site	5
+6	https://yandex.ru	Best Search Engine	7
 \.
 
 
@@ -904,6 +926,9 @@ COPY public.skolboard_profile_user_permissions (id, profile_id, permission_id) F
 --
 
 COPY public.skolboard_reaction (id, created_dttm, description, type, owner_id, post_id) FROM stdin;
+1	2020-01-23 00:22:40.344073+00	Not bad	0	10	1
+2	2020-01-23 00:22:58.404003+00	Why not	1	2	2
+3	2020-01-23 00:23:27.09926+00	Does not worth it	2	8	2
 \.
 
 
@@ -952,14 +977,14 @@ SELECT pg_catalog.setval('public.auth_permission_id_seq', 44, true);
 -- Name: board_reaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.board_reaction_id_seq', 1, false);
+SELECT pg_catalog.setval('public.board_reaction_id_seq', 3, true);
 
 
 --
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 68, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 75, true);
 
 
 --
@@ -980,14 +1005,14 @@ SELECT pg_catalog.setval('public.django_migrations_id_seq', 59, true);
 -- Name: skolboard_post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.skolboard_post_id_seq', 1, false);
+SELECT pg_catalog.setval('public.skolboard_post_id_seq', 3, true);
 
 
 --
 -- Name: skolboard_post_tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.skolboard_post_tags_id_seq', 1, false);
+SELECT pg_catalog.setval('public.skolboard_post_tags_id_seq', 11, true);
 
 
 --
@@ -1008,7 +1033,7 @@ SELECT pg_catalog.setval('public.skolboard_profile_id_seq', 10, true);
 -- Name: skolboard_profile_link_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.skolboard_profile_link_id_seq', 5, true);
+SELECT pg_catalog.setval('public.skolboard_profile_link_id_seq', 6, true);
 
 
 --
