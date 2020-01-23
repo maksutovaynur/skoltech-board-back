@@ -24,7 +24,6 @@ class PostViewSet(ModelViewSet):
 
 
 class ProfileViewSet(ModelViewSet):
-    # permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = profile.Profile.objects.all()
     serializer_class = profile.ProfileSerializer
     filterset_fields = {
