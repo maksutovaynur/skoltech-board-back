@@ -12,12 +12,18 @@ class ReadOnly(BasePermission):
 
 
 class PostViewSet(ModelViewSet):
-    queryset = post.Post.objects.all()
+    def get_queryset(self):
+        qs = post.Post.objects
+        tags = self.request.query_params.get('tags', None)
+        if isinstance(tags, list):
+            for t in tags:
+                qs = qs.filter(tags=t)
+        return qs.all()
     serializer_class = post.PostSerializer
     # filter_backends = [DjangoFilterBackend]
     filterset_fields = {
         'created_dttm': ['gte', 'lte', 'range'],
-        'tags': ['exact'],
+        # 'tags': ['exact'],
         'profile': ['exact'],
         'profile__type': ['exact']
     }
